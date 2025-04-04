@@ -5,6 +5,7 @@ return {
     local wk = require("which-key")
 
     wk.setup({
+      delay = 500,
       plugins = {
         marks = true,
         registers = true,
@@ -20,22 +21,12 @@ return {
         return key.desc ~= nil
       end,
       win = {
-        border = "rounded",   -- only valid key as of now
+        border = "rounded", -- only valid key as of now
       },
       layout = {
         spacing = 6,
         align = "left",
       },
-    })
-
-    -- Register top-level leader groups using new spec
-    wk.register({
-      { "<leader>c", group = "code actions" },
-      { "<leader>d", group = "diagnostics" },
-      { "<leader>f", group = "file" },
-      { "<leader>g", group = "git" },
-      { "<leader>r", group = "refactor/rename" },
-      { "<leader>w", group = "workspace" },
     })
   end,
 }
