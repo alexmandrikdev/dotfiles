@@ -6,6 +6,8 @@ ln -sf $DOTFILES/zsh/zshrc $HOME/.zshrc
 
 ln -sf $DOTFILES/tmux/tmux.conf $HOME/.tmux.conf
 
+ln -sf $DOTFILES/lazygit/config.yml $HOME/.config/lazygit/config.yml
+
 mkdir -p $HOME/.local/bin
 
 ln -sf $DOTFILES/scripts/t $HOME/.local/bin/t
