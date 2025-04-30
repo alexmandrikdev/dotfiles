@@ -122,5 +122,5 @@ esac
 # Usage: gcopylog n
 gcopylog() {
   local count=${1:-5}
-  git log -n "$count" --pretty=format:"%s%n%b%n" | xclip -selection clipboard
+  git log -n "$count" --date=short --pretty=format:"Commit: %h%nDate: %ad%nSubject: %s%n%n%b%n---" | xclip -selection clipboard
 }
