@@ -1,0 +1,159 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+" Handlers
+sethandler <C-c> a:vim
+sethandler <C-r> a:vim
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+
+" Searching
+set incsearch
+set ignorecase  
+
+" Match <>
+set matchpairs+=<:>
+
+set so=4
+
+" Set the clipboard to use the system clipboard
+set clipboard+=unnamed
+
+let mapleader = "\<Space>"
+
+" Use jj to exit insert mode
+inoremap jj <Esc>
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+
+" Toggle "Show Local Changes" tool window by pressing ctrl+k+g
+nmap <C-k><C-g> <Action>(Vcs.Show.Local.Changes)
+
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+set ideajoin
+
+function! FormatArray()
+    " Get the current line
+    let line = getline('.')
+
+    " Ensure the opening bracket is on its own line
+    let line = substitute(line, '\[\s*', "[\r    ", '')
+
+    " Replace each comma and following whitespace with a comma, newline, and indentation
+    let line = substitute(line, ',\s*', ",\r    ", 'g')
+
+    " Ensure the closing bracket is on its own line
+    let line = substitute(line, '\s*\]', "\r]", '')
+
+    " Replace the current line with the formatted text
+    call setline('.', line)
+endfunction
+
+nnoremap <leader>fa :call FormatArray()<CR>
+
+" Copilot 
+imap <C-c>r <Action>(copilot.requestCompletions)
+imap <C-c>n <Action>(NextInlineCompletionSuggestionAction)
+imap <C-c>i <Action>(copilot.applyInlays)
+imap <C-c>w <Action>(copilot.applyInlaysNextWord)
+imap <C-c>j <Action>(copilot.applyInlaysNextLine)
+map <C-c>c <Action>(ActivateGitHubCopilotChatToolWindow)
+
+" WhichKey
+set which-key
+set timeoutlen=1000                         "default is 1000
+let g:WhichKey_ShowVimActions = "true"
+let g:WhichKey_DefaultDelay = 500          "default is 200
+
+" NerdTree
+set NERDTree
+nmap <leader>nt :NERDTree<CR>
+nmap <leader>nc :NERDTreeClose<CR>
+nmap <leader>nf :NERDTreeFind<CR>
+
+" Git
+nmap <leader>gc <Action>(ActivateCommitToolWindow)
+nmap <leader>gu <Action>(Vcs.UpdateProject)
+nmap <leader>gp <Action>(Vcs.Push)
+nmap <leader>gl <Action>(Vcs.Show.Log)
+
+" Coding
+nmap <leader>gd <Action>(GotoDeclaration)
+nmap <leader>gtd <Action>(GotoTypeDeclaration)
+nmap <leader>gi <Action>(GotoImplementation)
+nmap <leader>gtt <Action>(GotoTest)
+nmap <leader>gu <Action>(ShowUsages)
+nmap <leader>cc <Action>(CodeCompletion)
+nmap <leader>qd <Action>(QuickJavaDoc)
+nmap <leader>qi <Action>(QuickImplementations)
+map <leader>sa <Action>(ShowIntentionActions)
+nmap <leader>ed <Action>(ShowErrorDescription)
+nmap <leader>ek <Action>(GotoPreviousError)
+nmap <leader>ej <Action>(GotoNextError)
+
+
+" Refactoring
+map <leader>rqal <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>rn <Action>(RenameElement)
+nmap <leader>rs <Action>(ChangeSignature)
+map <leader>riv <Action>(IntroduceVariable)
+map <leader>rem <Action>(ExtractMethod)
+nmap <leader>ril <Action>(Inline)
+
+" Terminal
+nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+
+" EasyMotion
+set easymotion
+
+" MultiCursor
+set multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+
+" Quick navigate
+nmap <leader>se <Action>(SearchEverywhere)
+nmap <leader>ga <Action>(GotoAction)
+nmap <leader>gtc <Action>(GotoClass)
+nmap <leader>gtf <Action>(GotoFile)
+nmap <leader>gts <Action>(GotoSymbol)
+nmap <leader>b <Action>(Back)
+nmap <leader>f <Action>(Forward)
+
+" Search and replace
+map <leader>fp <Action>(FindInPath)
+map <leader>rp <Action>(ReplaceInPath)
+map <leader>ff <Action>(Find)
+map <leader>rf <Action>(Replace)
+
+" Split
+map <leader>sv <Action>(SplitVertically)
+map <leader>sh <Action>(SplitHorizontally)
+
+nmap <C-q> <Action>(CloseContent)
