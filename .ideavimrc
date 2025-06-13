@@ -70,12 +70,21 @@ endfunction
 nnoremap <leader>fa :call FormatArray()<CR>
 
 " Copilot 
-imap <C-c>r <Action>(copilot.requestCompletions)
+" imap <C-c>r <Action>(copilot.requestCompletions)
+" imap <C-c>n <Action>(NextInlineCompletionSuggestionAction)
+" imap <C-c>i <Action>(copilot.applyInlays)
+" imap <C-c>w <Action>(copilot.applyInlaysNextWord)
+" imap <C-c>j <Action>(copilot.applyInlaysNextLine)
+" map <C-c>c <Action>(ActivateGitHubCopilotChatToolWindow)
+
+" Inline Completion
+imap <C-c>r <Action>(CallInlineCompletionAction)
 imap <C-c>n <Action>(NextInlineCompletionSuggestionAction)
-imap <C-c>i <Action>(copilot.applyInlays)
-imap <C-c>w <Action>(copilot.applyInlaysNextWord)
-imap <C-c>j <Action>(copilot.applyInlaysNextLine)
-map <C-c>c <Action>(ActivateGitHubCopilotChatToolWindow)
+imap <C-c>i <Action>(InsertInlineCompletionAction)
+imap <C-c>w <Action>(InsertInlineCompletionWordAction)
+imap <C-c>j <Action>(InsertInlineCompletionLineAction)
+map <C-c>c <Action>(ActivateClaudeMindToolWindow)
+map <leader>cc <Action>(com.claudemind.actions.InlineClaudeMindAction)
 
 " WhichKey
 set which-key
