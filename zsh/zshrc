@@ -125,7 +125,12 @@ gcopylog() {
   git log -n "$count" --date=iso --pretty=format:"Commit: %h%nDate: %ad%nSubject: %s%n%n%b%n---" | xclip -selection clipboard
 }
 
-# Usage: gdiff-clean [base=main] [target=HEAD]
+# gdiff-clean: Git diff between two branches, excluding lock files, and copies to clipboard.
+# Usage:
+#   gdiff-clean [base] [target]
+# Example:
+#   gdiff-clean main feature-branch
+#   gdiff-clean           # defaults to main...HEAD
 gdiff-clean() {
   local base=${1:-main}
   local target=${2:-HEAD}
@@ -136,3 +141,16 @@ gdiff-clean() {
     ':(exclude)composer.lock' | xclip -selection clipboard
   echo "Diff copied to clipboard (excluding lock files)."
 }
+
+# Enable Git branch name autocompletion for gdiff-clean
+_gdiff-clean() {
+  _arguments \
+    '1: :->branches' \
+    '2: :->branches'
+
+  if [[ $state == branches ]]; then
+    compadd $(git for-each-ref --format='%(refname:short)' refs/heads/)
+  fi
+}
+compdef _gdiff-clean gdiff-clean
+
