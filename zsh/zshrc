@@ -135,10 +135,10 @@ gdiff-clean() {
   local base=${1:-main}
   local target=${2:-HEAD}
   git diff "$base...$target" -- . \
-    ':(exclude)package-lock.json' \
-    ':(exclude)yarn.lock' \
-    ':(exclude)pnpm-lock.yaml' \
-    ':(exclude)composer.lock' | xclip -selection clipboard
+    ':!**/package-lock.json' \
+    ':!**/yarn.lock' \
+    ':!**/pnpm-lock.yaml' \
+    ':!**/composer.lock' | xclip -selection clipboard
   echo "Diff copied to clipboard (excluding lock files)."
 }
 
