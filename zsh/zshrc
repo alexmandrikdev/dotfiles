@@ -154,3 +154,15 @@ _gdiff-clean() {
 }
 compdef _gdiff-clean gdiff-clean
 
+function git_create_wip_branch() {
+  local base_branch="${1:-main}"
+  local date_stamp="$(date +%Y%m%d-%H%M%S)"
+  local wip_branch="alexmandrik/wip/$date_stamp"
+
+  echo "👉 Pulling latest changes from $base_branch..."
+  git checkout "$base_branch" || return 1
+  git pull origin "$base_branch" || return 1
+
+  echo "👉 Creating WIP branch: $wip_branch"
+  git checkout -b "$wip_branch" || return 1
+}
