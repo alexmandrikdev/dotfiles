@@ -108,6 +108,7 @@ path=(
 
 alias vim="nvim"
 
+alias clip="xclip -selection clipboard"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
