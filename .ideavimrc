@@ -129,6 +129,8 @@ nmap <leader>ril <Action>(Inline)
 
 " Terminal
 nmap <leader>tt <Action>(ActivateTerminalToolWindow)
+" Open current file in terminal
+nmap <leader>tc <Action>(Terminal.OpenInReworkedTerminal)
 
 " EasyMotion
 set easymotion
