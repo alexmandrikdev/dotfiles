@@ -176,3 +176,12 @@ gcreate-wipbranch() {
   echo "👉 Creating WIP branch: $wip_branch"
   git checkout -b "$wip_branch" || return 1
 }
+
+# Update the current branch with the latest changes from main using rebase
+gmain-rebase() {
+  local current_branch=$(git symbolic-ref --short HEAD)
+  git checkout main
+  git pull origin main
+  git checkout "$current_branch"
+  git rebase main
+}
