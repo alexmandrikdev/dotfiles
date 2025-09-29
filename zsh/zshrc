@@ -155,6 +155,15 @@ _gdiff-clean() {
 }
 compdef _gdiff-clean gdiff-clean
 
+# Copy the staged changes excluding lock files to the clipboard
+gdiff-staged() {
+  git diff --staged -- . \
+    ':(exclude)package-lock.json' \
+    ':(exclude)yarn.lock' \
+    ':(exclude)pnpm-lock.yaml' \
+    ':(exclude)composer.lock' | xclip -selection clipboard
+}
+
 gcreate-wipbranch() {
   local base_branch="${1:-main}"
   local date_stamp="$(date +%Y%m%d-%H%M%S)"
