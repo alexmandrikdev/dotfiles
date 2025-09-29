@@ -155,7 +155,7 @@ _gdiff-clean() {
 }
 compdef _gdiff-clean gdiff-clean
 
-function git_create_wip_branch() {
+gcreate-wipbranch() {
   local base_branch="${1:-main}"
   local date_stamp="$(date +%Y%m%d-%H%M%S)"
   local wip_branch="alexmandrik/wip/$date_stamp"
