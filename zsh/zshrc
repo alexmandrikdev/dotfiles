@@ -163,3 +163,8 @@ gdiff-staged() {
     ':(exclude)pnpm-lock.yaml' \
     ':(exclude)composer.lock' | xclip -selection clipboard
 }
+
+# Add devin completions
+if command -v devin &> /dev/null; then
+  eval "$(devin completions)"
+fi
